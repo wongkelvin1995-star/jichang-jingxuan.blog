@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+// Brands with custom/premium options (e.g. Lingdongyun, Twilight, Kuajieyun)
+const premiumBrands = brands.filter(b => b.slug === 'lingdongyun' || b.slug === 'twilight' || b.slug === 'kuajieyun' || b.slug === 'invisible');
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '高端机场推荐', url: '/premium-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026高端机场推荐：商务定制专线、独享IP与企业级网络加速｜机场精选"
+  description="针对追求极致稳定、跨国远程办公与高带宽需求的高端用户，盘点提供独享带宽、专属公网IP及企业级专线定制服务的高端机场品牌与套餐方案。"
+  canonicalUrl="https://jichang-jingxuan.blog/premium-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">高端机场推荐</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">PREMIUM ENTERPRISE CLASS</div>
+      <h1 class="section-title">2026 高端机场推荐与定制专线指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        为跨境电商团队、跨国商务办公、高净值个人及超重度流量用户量身定制的专属加速方案。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        高端机场相较于普通机场的核心增值点
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          <strong>一、独享物理带宽与专属公网 IP：</strong>例如灵动云与暮光加速提供的“至尊私人定制”规格（¥680/月起，约需 2–3 个工作日交付），为用户分配专属固定 IP 与独立带宽出口，彻底规避因邻居用户违规操作导致 IP 被海外风控封禁的联带风险。
+        </p>
+        <p>
+          <strong>二、优先工单客服通道：</strong>高端用户享有专属技术团队响应支持，遇到节点故障或客户端适配疑问可在极短时限内获得排查解决。
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        支持高端专线与商务定制的代表品牌
+      </h2>
+      <div class="brands-grid">
+        {premiumBrands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        高配及定制在售套餐一览
+      </h2>
+      <PlanTable initialFilter="large-traffic" showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

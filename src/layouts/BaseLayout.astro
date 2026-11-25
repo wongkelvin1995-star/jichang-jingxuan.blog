@@ -1,0 +1,106 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  ogType?: string;
+  noindex?: boolean;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  schema?: object;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl = Astro.url.href,
+  ogType = 'website',
+  noindex = false,
+  breadcrumbs = [],
+  schema
+} = Astro.props;
+
+const siteDomain = 'https://jichang-jingxuan.blog';
+// Ensure canonical format: normalized URL with trailing slash if directory
+const cleanCanonical = canonicalUrl.startsWith('http') 
+  ? canonicalUrl 
+  : `${siteDomain}${canonicalUrl.startsWith('/') ? '' : '/'}${canonicalUrl}`;
+
+// Default structured data: WebSite & Organization
+const defaultSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteDomain}/#website`,
+      'url': siteDomain,
+      'name': '机场精选 · Airport Select',
+      'description': '专业机场品牌精选博客与选购指南，汇集热门机场套餐价格、节点与评测参考。',
+      'inLanguage': 'zh-CN'
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${siteDomain}/#organization`,
+      'name': '机场精选编辑部',
+      'url': siteDomain,
+      'logo': `${siteDomain}/favicon.svg`
+    },
+    ...(breadcrumbs.length > 0 ? [{
+      '@type': 'BreadcrumbList',
+      '@id': `${cleanCanonical}#breadcrumb`,
+      'itemListElement': breadcrumbs.map((b, idx) => ({
+        '@type': 'ListItem',
+        'position': idx + 1,
+        'name': b.name,
+        'item': b.url.startsWith('http') ? b.url : `${siteDomain}${b.url}`
+      }))
+    }] : []),
+    ...(schema ? [schema] : [])
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={cleanCanonical} />
+  
+  {noindex ? (
+    <meta name="robots" content="noindex, follow" />
+  ) : (
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  )}
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={cleanCanonical} />
+  <meta property="og:site_name" content="机场精选 Airport Select" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#101D35" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(defaultSchema)} />
+</head>
+<body>
+  <Header currentPath={Astro.url.pathname} />
+  <main id="main-content">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

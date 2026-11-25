@@ -1,0 +1,22 @@
+{
+  "name": "airport-select-max",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Airport Select MAX · 机场精选旗舰版 —— 2026 优质机场推荐与套餐选购指南",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/build-data.mjs && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "build-data": "node scripts/build-data.mjs"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.0",
+    "astro": "^7.4.8",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

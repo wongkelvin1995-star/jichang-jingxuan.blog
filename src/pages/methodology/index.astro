@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '精选标准与方法论', url: '/methodology/' }
+];
+---
+
+<BaseLayout
+  title="精选标准与方法论 - 榜单推荐规则、评估逻辑与数据核实机制｜机场精选"
+  description="公开机场精选（Airport Select）编辑推荐排行榜的排序规则、数据采集来源、专线评估机制与商业合作披露，保障评估逻辑透明可查。"
+  canonicalUrl="https://jichang-jingxuan.blog/methodology/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="article-reader-container">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">精选标准与方法论</span>
+    </nav>
+
+    <header style="margin-bottom: 36px; text-align: center;">
+      <div class="section-eyebrow">EDITORIAL METHODOLOGY</div>
+      <h1 class="article-main-title">机场精选标准与评估方法论</h1>
+      <p style="font-size: 1.05rem; color: var(--color-text-muted);">
+        公开榜单排序规则、数据采集溯源流程与商业合作关系界定
+      </p>
+    </header>
+
+    <div class="article-prose">
+      <h2>一、榜单性质与排序原则</h2>
+      <p>
+        <strong>公开声明：</strong> 本站首页、精选榜单（/ranking/）以及品牌大全中的固定展示顺序（灵动云第一、暮光加速第二、微风网络第三、飞猫云第四、大佬云第五、FLYV 与浪网并列第六等），属于<strong>站长及编辑团队指定的“编辑推荐展示顺序”</strong>。
+      </p>
+      <p>
+        我们郑重承诺：<strong>本站绝不将指定推荐排名伪装成全网公开投票排名、自动化性能测速排名或国家权威认证排名</strong>。该顺序综合考量了服务商的线路冗余度、在售套餐结构丰富度、计费倍率透明度、以及站长与部分品牌的运营合作深度。
+      </p>
+
+      <h2>二、四大核心评估维度</h2>
+      <p>
+        在评估一个品牌是否具备推荐价值时，我们主要依据以下四个可验证维度：
+      </p>
+      <ol>
+        <li>
+          <strong>线路架构与专线真实性（权重 35%）：</strong> 优先收录拥有 IEPL/IPLC 跨境物理专线与多线 BGP 智能调度入口的品牌。对纯公网单点直连的服务商实行严格降权。
+        </li>
+        <li>
+          <strong>计费透明度与无暗扣政策（权重 25%）：</strong> 优先推荐全节点统一 1.0x 倍率计费的品牌。严禁收录存在严重超售、高峰期擅自上调倍率的套路机场。
+        </li>
+        <li>
+          <strong>多端生态与配置门槛（权重 20%）：</strong> 考察是否配备易用的官方客户端（Windows、macOS、Android、iOS Nextin）或支持标准的 Clash 通用订阅，降低新老用户的接入难度。
+        </li>
+        <li>
+          <strong>价格梯度与试错灵活性（权重 20%）：</strong> 重点考察是否具备 20 元以内的平价月付、百元以内年付小包或不限时买断流量包，保障用户低成本试错。
+        </li>
+      </ol>
+
+      <h2>三、数据更新与核实流程</h2>
+      <p>
+        全站 18 个品牌与 142 条套餐明细的维护遵循以下 SOP 规范：
+      </p>
+      <ul>
+        <li><strong>定期核对：</strong> 每月核验各品牌官方结账中心的价格、套餐存续状态及优惠券可用性。</li>
+        <li><strong>时间戳标注：</strong> 所有套餐数据均标明采集核实日期（如 2026-11-23），历史活动明确注明记录时效。</li>
+        <li><strong>读者纠错：</strong> 开通专门的反馈通道，一旦发现某品牌套餐调价或政策调整，在 48 小时内核实并全站更新。</li>
+      </ul>
+
+      <h2>四、商业利益关系坦白披露</h2>
+      <p>
+        为维持网站服务器、CDN 带宽与日常内容更新，本站与包括灵动云、暮光加速、大佬云在内的部分推荐品牌存在商业推广或联盟返佣（AFF）合作。
+      </p>
+      <p>
+        这一商业模式有助于我们持续输出高质量的深度科普文章，但我们始终坚持：<strong>商业合作不得颠倒产品真实参数，不得隐瞒产品已知局限，不得为了推广佣金而向用户推荐劣质高危机场</strong>。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

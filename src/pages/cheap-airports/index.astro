@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+// Filter cheap brands: minMonthlyPrice <= 20 or minYearlyPrice <= 120
+const cheapBrands = brands.filter(b => (b.minMonthlyPrice && b.minMonthlyPrice <= 20) || (b.minYearlyPrice && b.minYearlyPrice <= 110));
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '便宜机场推荐', url: '/cheap-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026便宜机场推荐：低预算、高性价比平价机场套餐精选｜机场精选"
+  description="精选月付20元以内及百元以内年付平价机场：大佬云（¥19.99/月）、飞猫云（¥15/月）、微风网络等，帮助学生与低预算用户在控制支出的同时获得合格的网络体验。"
+  canonicalUrl="https://jichang-jingxuan.blog/cheap-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">便宜机场推荐</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">BUDGET-FRIENDLY PICKS</div>
+      <h1 class="section-title">2026 便宜机场推荐与低预算指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        不花冤枉钱。精选月付 15–20 元起步及年付百元以内的平价品牌，重点甄选全节点 1x 倍率、不限设备的正规服务商。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        便宜机场选购三大核心防坑守则
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          <strong>防坑一：警惕“一元机场”与严重超售。</strong>几块钱一年的超低价小作坊通常超售成千上万倍，晚高峰根本打不开网页，甚至运营数周便关网失联。选择低预算方案，月付 15–20 元是能够维持正规专线机房开支与基础运维的理性底线。
+        </p>
+        <p>
+          <strong>防坑二：确认是否有隐性倍率扣费。</strong>很多标榜 500GB 极低价的套餐，实际可用节点被设置为 3.0x 乃至 5.0x 倍率，实际可用流量缩水三分之二。本专栏收录的低价代表品牌均以公开透明的 1.0x 计费为主。
+        </p>
+      </div>
+    </div>
+
+    <!-- Cheap Brand Collection -->
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        精选平价高口碑机场品牌
+      </h2>
+      <div class="brands-grid">
+        {cheapBrands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <!-- 20元及以下月付表格 -->
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        每月 20 元及以下优质在售套餐列表
+      </h2>
+      <PlanTable initialFilter="under-20-monthly" showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '30–60元月付', url: '/plans/30-60-monthly/' }
+];
+---
+
+<BaseLayout
+  title="2026每月30–60元机场推荐：高阶专线、大流量与多设备主力套餐对比｜机场精选"
+  description="精选每月30至60元的主力机场套餐：灵动云驭浪（¥50/月，300GB）、暮光标准版（¥40/月，240GB）及大佬云凌云版（¥43/月，300GB）等综合测评。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/30-60-monthly/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">30–60元月付</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">HEAVY DUTY MAINSTREAM</div>
+      <h1 class="section-title">2026 每月 30–60 元机场推荐与对比</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        绝大多数专业外贸人员、全天候远程办公者与 4K 追剧爱好者的主力预算区间。充沛带宽与多出口容灾是其核心优势。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        30–60 元区间为什么是主力首选？
+      </h2>
+      <p>
+        此区间的套餐（如 300GB 至 500GB）不仅拥有充足的流量冗余，服务商通常还会为其配置冗余度更高的 BGP 智能调度与多机房容灾，全天候连接更为平稳无感。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="30-60-monthly" showFilters={true} />
+  </div>
+</BaseLayout>

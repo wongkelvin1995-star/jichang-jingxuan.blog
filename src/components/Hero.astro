@@ -1,0 +1,61 @@
+---
+import brands from '../data/brands.json';
+import plans from '../data/plans.json';
+
+const brandCount = brands.length;
+const planCount = plans.length;
+---
+
+<section class="hero-wrap">
+  <div class="container">
+    <div class="hero-tag">AIRPORT SELECT · THE 2026 EDITION</div>
+    
+    <h1 class="hero-h1">
+      2026 机场精选｜优质机场推荐与选购指南
+    </h1>
+
+    <div class="hero-slogan">
+      精选好机场。每一次连接，都值得。
+    </div>
+
+    <p class="hero-desc">
+      汇集热门机场品牌、套餐价格与服务特点，为不同预算及使用需求提供清晰、实用的机场选购参考。拒绝虚假测速与盲目吹捧，专注真实数据与长期可用性。
+    </p>
+
+    <div class="hero-ctas">
+      <a href="/ranking/" class="btn btn-primary btn-lg">
+        <span>探索精选榜单</span>
+        <span>→</span>
+      </a>
+      <a href="/airports/" class="btn btn-outline btn-lg">
+        <span>浏览全部品牌</span>
+      </a>
+      <a href="/compare/" class="btn btn-outline btn-lg" style="border-style: dashed;">
+        <span>横向套餐对比</span>
+      </a>
+    </div>
+
+    <!-- Live Dynamic Stats Bar -->
+    <div class="hero-stats-bar">
+      <div class="stat-item">
+        <div class="stat-num">{brandCount}</div>
+        <div class="stat-label">收录精选品牌</div>
+      </div>
+      <div style="width: 1px; height: 36px; background: var(--color-border);" aria-hidden="true"></div>
+      <div class="stat-item">
+        <div class="stat-num">{planCount}</div>
+        <div class="stat-label">真实套餐记录</div>
+      </div>
+      <div style="width: 1px; height: 36px; background: var(--color-border);" aria-hidden="true"></div>
+      <div class="stat-item">
+        <div class="stat-num">4 档</div>
+        <div class="stat-label">灵活付款周期</div>
+      </div>
+      <div style="width: 1px; height: 36px; background: var(--color-border);" aria-hidden="true"></div>
+      <div class="stat-item">
+        <div class="stat-num">10+ 篇</div>
+        <div class="stat-label">专题选购指南</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '大流量机场套餐', url: '/plans/large-traffic/' }
+];
+---
+
+<BaseLayout
+  title="2026大流量机场套餐推荐：500GB与1TB以上超重度下载与团队办公方案｜机场精选"
+  description="面向大文件跨境传输、4K视频全天候串流及小型工作室团队共享：精选500GB、700GB及1TB以上大流量机场套餐，保障大带宽与高并发稳定。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/large-traffic/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">大流量机场套餐</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">MASSIVE BANDWIDTH PLANS</div>
+      <h1 class="section-title">2026 大流量机场套餐选购指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        500GB、700GB 至 1.5TB 超大规格汇总。专为大文件同步、高清视频创作者及团队多设备共享设计。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        大流量套餐选购核心重点
+      </h2>
+      <p>
+        大流量消耗最怕两点：“高峰期单节点限制带宽”与“隐形多倍率扣费”。务必优先挑选灵动云、大佬云、梯子云等明确承诺全节点 1x 倍率与充沛独立出口带宽的品牌。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="large-traffic" showFilters={true} />
+  </div>
+</BaseLayout>

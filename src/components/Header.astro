@@ -1,0 +1,91 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { name: '首页', href: '/' },
+  { name: '精选榜单', href: '/ranking/' },
+  { name: '机场品牌', href: '/airports/' },
+  { name: '套餐指南', href: '/plans/' },
+  { name: '精选文章', href: '/articles/' },
+  { name: '关于我们', href: '/about/' },
+];
+---
+
+<header class="header-sticky">
+  <div class="container">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo-wrap" title="机场精选 - 优质机场推荐与套餐选购指南">
+        <div class="brand-symbol">AS</div>
+        <div class="brand-text-name">
+          <span>机场精选</span>
+          <span class="brand-text-sub">AIRPORT SELECT</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav aria-label="全站主要导航">
+        <ul class="nav-links">
+          {navItems.map(item => {
+            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a href={item.href} class={`nav-item-link ${isActive ? 'active' : ''}`}>
+                  {item.name}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <a href="/search/" class="search-trigger-btn" title="站内搜索机场品牌与文章">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>搜索</span>
+        </a>
+
+        <!-- Mobile Drawer Toggle -->
+        <button id="mobile-toggle-btn" class="mobile-menu-btn" aria-label="切换移动端导航菜单" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="hamburger-icon"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+    {navItems.map(item => (
+      <a href={item.href} class="mobile-nav-link">
+        <span>{item.name}</span>
+        <span style="color: var(--color-gold); font-size: 0.9rem;">→</span>
+      </a>
+    ))}
+    <a href="/search/" class="mobile-nav-link" style="margin-top: 10px; background: var(--color-gold-light); padding: 12px 16px; border-radius: var(--radius-sm);">
+      <span style="color: var(--color-primary); font-weight: 800;">站内全局搜索</span>
+      <span>🔍</span>
+    </a>
+  </div>
+</header>
+
+<script is:inline>
+  const toggleBtn = document.getElementById('mobile-toggle-btn');
+  const drawer = document.getElementById('mobile-drawer');
+
+  if (toggleBtn && drawer) {
+    toggleBtn.addEventListener('click', () => {
+      const isOpen = drawer.classList.contains('open');
+      if (isOpen) {
+        drawer.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        drawer.classList.add('open');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+</script>

@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '翻墙机场指南', url: '/proxy-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026翻墙机场推荐与科学上网选购指南：节点协议、线路安全与入门常识｜机场精选"
+  description="针对刚接触科学上网的中文用户，全面讲解翻墙机场的基础概念、节点运作机制、主流代理协议（Shadowsocks、VLESS）与网络安全防范常识。"
+  canonicalUrl="https://jichang-jingxuan.blog/proxy-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">翻墙机场指南</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">ESSENTIAL PROXY GUIDE</div>
+      <h1 class="section-title">2026 翻墙机场指南与科学上网常识</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        剥离繁琐晦涩的网络工程名词，用通俗易懂的语言厘清代理机场的核心原理，助你安全、合规、稳定地连接全球网络。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        科学上网的核心入门三要素
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          <strong>什么是“机场”？</strong>在网络代理语境下，“机场”代指通过 Shadowsocks、VLESS 等现代代理协议，搭建起覆盖全球多个国家和地区节点集群的商业网络加速服务商。用户借助其节点中转，绕过防火墙限制，访问海外学术、影音及办公资源。
+        </p>
+        <p>
+          <strong>安全与合规守则：</strong>使用科学上网服务仅限个人查阅文献、技术学习、合规海外贸易及日常交流。切勿在不可信的网络节点上输入未加密的高敏感密码，并严格遵守当地法律法规。
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        适合日常科学上网的精选主流品牌
+      </h2>
+      <div class="brands-grid">
+        {brands.slice(0, 6).map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        在售基础与进阶套餐横向对比
+      </h2>
+      <PlanTable limit={12} showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

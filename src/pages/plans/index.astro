@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlanTable from '../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '全部套餐指南', url: '/plans/' }
+];
+
+const subTopics = [
+  { name: '年付套餐', href: '/plans/annual/', desc: '长周期大幅折扣，折算单月成本低' },
+  { name: '月付套餐', href: '/plans/monthly/', desc: '试错门槛极低，灵活按月续费' },
+  { name: '不限时流量包', href: '/plans/lifetime/', desc: '一次性购买用完为止，永不过期' },
+  { name: '百元以内年付', href: '/plans/under-100-yearly/', desc: '超低预算轻量备用首选' },
+  { name: '20元及以下月付', href: '/plans/under-20-monthly/', desc: '个人日常办公学习黄金性价比' },
+  { name: '30元以内月付', href: '/plans/under-30-monthly/', desc: '兼顾专线速度与大流量需求' },
+  { name: '30–60元月付', href: '/plans/30-60-monthly/', desc: '主力多设备与4K高画质享受' },
+  { name: '大流量机场套餐', href: '/plans/large-traffic/', desc: '500GB及1TB+超重度下载方案' }
+];
+---
+
+<BaseLayout
+  title="2026机场套餐指南大全：142条月付、年付与不限时套餐价格明细｜机场精选"
+  description="全景呈现18个品牌的全部142条在售套餐价格与流量参数。提供年付、月付、百元以内年付、20元以内月付、大流量及不限时等全专题入口。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">全部套餐指南</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">COMPLETE PLAN DIRECTORY</div>
+      <h1 class="section-title">2026 机场套餐选购总指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        聚合 142 条真实在售套餐数据。选择下方各专题分类深入了解，或直接在总表中按需筛选对比。
+      </p>
+    </header>
+
+    <!-- Subtopic Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 50px;">
+      {subTopics.map(st => (
+        <a href={st.href} class="faq-card" style="padding: 20px; transition: all 0.2s ease;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h2 style="font-size: 1.15rem; font-weight: 800; color: var(--color-primary);">{st.name}</h2>
+            <span style="color: var(--color-gold); font-size: 1rem;">→</span>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.6;">
+            {st.desc}
+          </p>
+        </a>
+      ))}
+    </div>
+
+    <!-- Full Filterable Table -->
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        全部 142 条在售套餐总览
+      </h2>
+      <PlanTable showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

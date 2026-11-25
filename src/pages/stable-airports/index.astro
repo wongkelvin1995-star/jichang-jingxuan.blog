@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+// Filter brands with strong lineType (IEPL / BGP)
+const stableBrands = brands.filter(b => b.lineType.includes('专线') || b.lineType.includes('IEPL') || b.lineType.includes('BGP')).slice(0, 6);
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '稳定机场选购', url: '/stable-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026稳定机场选购：长期稳定连接、专线调度与抗拥堵评估指南｜机场精选"
+  description="什么样的机场才能称得上长期稳定？深入解析IEPL专线、BGP智能调度、多机房冗余备份与低丢包率的关键指标，为跨境商务与稳定用户提供选购建议。"
+  canonicalUrl="https://jichang-jingxuan.blog/stable-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">稳定机场选购</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">HIGH STABILITY NETWORK</div>
+      <h1 class="section-title">2026 稳定机场选购指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        长期使用的核心在于“低延迟、零丢包、抗晚高峰与多入口容灾”。拒绝纸面虚高测速，聚焦真正的网络高可用性。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        稳定机场的技术基石：专线与多线调度
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          稳定性的第一要素是<strong>物理专线隔离</strong>。公网中转节点在遇到国际出海海缆维护或晚高峰全网大拥堵时，丢包率往往从 1% 激增至 30% 以上；而具备 IEPL / IPLC 专线通道的服务商，境内数据先接入内网机房，再通过跨境高速专线直达香港、日本、新加坡等出口，全程不走公网防火墙，确保稳定低时延。
+        </p>
+        <p>
+          稳定性的第二要素是<strong>BGP 入口冗余智能调度</strong>。优质品牌（如灵动云、暮光加速）在国内布设了移动、电信、联通等多线 BGP 入口，当某省份某运营商局部网络割接故障时，客户端可通过智能调度平滑切换至可用机房，实现无感故障转移。
+        </p>
+      </div>
+    </div>
+
+    <!-- Selected Stable Brands -->
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        具备专线优化与高稳定架构的精选品牌
+      </h2>
+      <div class="brands-grid">
+        {stableBrands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <!-- Relevant Plans -->
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        适合稳定长周期使用的套餐推荐
+      </h2>
+      <PlanTable initialFilter="annual" limit={12} showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

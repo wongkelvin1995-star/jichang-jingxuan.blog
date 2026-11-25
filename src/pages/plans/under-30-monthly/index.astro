@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '30元以内月付', url: '/plans/under-30-monthly/' }
+];
+---
+
+<BaseLayout
+  title="2026每月30元以内机场套餐推荐：兼顾专线速度与充沛流量｜机场精选"
+  description="精选每月30元以内的进阶月付机场：微风网络（¥25/月）、大佬云进阶版（¥25/月，150GB）、灵动云等，分析20-30元区间的性价比飞跃。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/under-30-monthly/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">30元以内月付</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">BALANCED PERFORMANCE</div>
+      <h1 class="section-title">2026 每月 30 元以内机场套餐推荐</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        预算从 20 元微调至 30 元，往往能升级到更宽裕的流量额度（150GB–250GB）与更优先的专线路由出口。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        30 元内套餐性价比飞跃
+      </h2>
+      <p>
+        在 20–30 元价格区间，微风网络、大佬云等品牌提供了配比更加合理的进阶规格，不仅能从容应对日常高频代码查阅与学术检索，还能在周末畅快刷 4K 影视。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="under-30-monthly" showFilters={true} />
+  </div>
+</BaseLayout>

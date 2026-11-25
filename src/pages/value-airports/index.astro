@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+const valueBrands = brands.slice(0, 6);
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '高性价比机场', url: '/value-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026高性价比机场推荐：单位流量成本、专线品质与多周期方案精选｜机场精选"
+  description="衡量性价比不是看绝对低价，而是看每GB流量单价与线路体验的平衡。精选微风网络、灵动云、大佬云、飞猫云等单位成本优异的机场服务。"
+  canonicalUrl="https://jichang-jingxuan.blog/value-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">高性价比机场</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">BEST VALUE FOR MONEY</div>
+      <h1 class="section-title">2026 高性价比机场选购指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        用理性的数据丈量每一分支出。对比 18 个品牌的每 GB 流量折算成本、设备不限政策与专线品质，筛选出品质与价格的最佳平衡点。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        科学计算性价比的三条硬指标
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          <strong>1. 每 GB 单价（Cost per GB）：</strong>主流机场月付套餐的平均单价在 ¥0.15–¥0.25/GB 之间；年付或高阶套餐通常可降至 ¥0.10/GB 以下。若单价低于 ¥0.05/GB 且非年付活动包，需警惕虚标与恶性超售。
+        </p>
+        <p>
+          <strong>2. 是否限制设备数量：</strong>如大佬云、灵动云等品牌明确标注“不限同时在线设备数”，家庭多人或个人电脑、手机、平板共享时，无需为额外设备槽位重复付费，实际使用价值倍增。
+        </p>
+        <p>
+          <strong>3. 折扣与优惠码叠加：</strong>合理利用首月 7 折或 8 折优惠券（如 dly888、ld888），能进一步压低初次尝鲜成本。
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        编辑甄选高性价比代表品牌
+      </h2>
+      <div class="brands-grid">
+        {valueBrands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        精选高性价比在售套餐一览
+      </h2>
+      <PlanTable limit={15} showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

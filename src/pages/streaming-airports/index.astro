@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+const streamingBrands = brands.filter(b => b.streamingAi.netflix.includes('支持') || b.streamingAi.netflix.includes('解锁') || b.streamingAi.netflix.includes('原生')).slice(0, 6);
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '流媒体机场指南', url: '/streaming-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026流媒体机场推荐：Netflix、Disney+与YouTube 4K画质解锁选购指南｜机场精选"
+  description="告别卡顿与自制剧限制：盘点支持Netflix、Disney+非自制剧解锁与YouTube 4K平稳播放的优质机场品牌及套餐对比。"
+  canonicalUrl="https://jichang-jingxuan.blog/streaming-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">流媒体机场指南</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">GLOBAL STREAMING ENTERTAINMENT</div>
+      <h1 class="section-title">2026 流媒体机场选购指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        畅享 Netflix 跨区独播、Disney+ 杜比视界与 YouTube 4K 超高清，远离频繁转圈与“仅能观看自制剧”的烦恼。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        流媒体解锁的核心技术门道
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          <strong>原生解锁 vs DNS 分流解锁：</strong>许多用户以为只要节点能连就能看奈飞，其实不然。如果节点 IP 被 Netflix 识别为普通数据中心机房，你只能看到 Netflix 原创自制剧（如《怪奇物语》），而看不到当地独播版权电影。优质机场通常通过 DNS 劫持重定向或采购原生住宅 IP 实现全面完整解锁。
+        </p>
+        <p>
+          <strong>4K 播放的带宽冗余：</strong>播放 YouTube 4K 60FPS 视频至少需要 35Mbps–50Mbps 的持续稳定单线程带宽，选择全节点 1.0x 倍率、不限速且带宽储备在 1Gbps 以上的专线机场是避免缓冲卡顿的关键。
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        海外流媒体解锁表现良好的推荐品牌
+      </h2>
+      <div class="brands-grid">
+        {streamingBrands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        适合追剧大流量在售套餐对比
+      </h2>
+      <PlanTable limit={12} showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

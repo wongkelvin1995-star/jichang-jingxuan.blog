@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '隐私政策', url: '/privacy/' }
+];
+---
+
+<BaseLayout
+  title="隐私政策 - 用户信息保护与数据安全守则｜机场精选"
+  description="机场精选（Airport Select）隐私政策：承诺不强制收集用户敏感个人信息，不追踪越权隐私，保障访客浏览数据安全。"
+  canonicalUrl="https://jichang-jingxuan.blog/privacy/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="article-reader-container">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">隐私政策</span>
+    </nav>
+
+    <header style="margin-bottom: 36px; text-align: center;">
+      <div class="section-eyebrow">PRIVACY POLICY</div>
+      <h1 class="article-main-title">机场精选隐私保护政策</h1>
+      <p style="font-size: 0.95rem; color: var(--color-text-muted);">
+        生效日期：2026年11月24日 · 版本号：v2026.1
+      </p>
+    </header>
+
+    <div class="article-prose">
+      <h2>一、引言</h2>
+      <p>
+        <strong>机场精选（Airport Select，网站域名：https://jichang-jingxuan.blog/）</strong> 高度重视广大访客的个人隐私与信息安全。本隐私政策旨在向您说明我们如何收集、使用、存储和保护您在访问和使用本网站时产生的信息。
+      </p>
+
+      <h2>二、我们收集的信息类型</h2>
+      <p>
+        本站是一个纯静态（SSG）内容参考博客，我们在架构设计上实行“最小化数据采集”原则：
+      </p>
+      <ul>
+        <li><strong>无注册账户系统：</strong> 本站无需读者注册账号、绑定手机号码或提交身份证件，您无需登录即可浏览全站所有公开文章与套餐数据。</li>
+        <li><strong>服务器基础日志：</strong> 类似所有托管于 Cloudflare 等全球分发网络的网站，基础网络日志仅记录匿名化的访问时间、请求路径、User-Agent 浏览器类型及大致地理区域，用于防范网络恶意爬虫及 DDoS 攻击。</li>
+        <li><strong>无侵入式第三方追踪：</strong> 本站不嵌入带有跨站行为追踪特征的商业广告 SDK。</li>
+      </ul>
+
+      <h2>三、Cookie 的使用政策</h2>
+      <p>
+        本站仅在必要时使用轻量级的本地存储（LocalStorage / SessionStorage）来保存您在表格交互中的临时筛选状态（例如是否勾选了“仅看月付套餐”），此类数据仅保存在您的本地浏览器中，绝不会上传至远端服务器。
+      </p>
+
+      <h2>四、第三方链接与免责声明</h2>
+      <p>
+        本站文章与表格中包含跳转至第三方机场服务商官方网站的超链接。当您点击离开本网站进入第三方站点后，第三方站点的隐私政策与数据收集实践（如其用户中心注册、支付通道）将受该第三方独立的隐私条款约束。建议您在任何外部站点提交账号密码或资金支付前，仔细查阅其官方隐私政策。
+      </p>
+
+      <h2>五、隐私政策的更新</h2>
+      <p>
+        我们可能会根据法律法规或网站功能演进适时修订本政策。所有修订将在此页面发布并更新生效日期。若有关于隐私条款的疑问，可通过 contact@jichang-jingxuan.blog 与我们联系。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

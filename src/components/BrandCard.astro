@@ -1,0 +1,96 @@
+---
+interface Props {
+  brand: {
+    slug: string;
+    name: string;
+    rank: number;
+    displayOrder: number;
+    description: string;
+    tagline: string;
+    badge?: string;
+    minMonthlyPrice: number | null;
+    minYearlyPrice: number | null;
+    plansCount: number;
+    lineType: string;
+    purchaseUrl: string;
+    highlightFeatures?: string[];
+    hasLifetimePlans?: boolean;
+  };
+}
+
+const { brand } = Astro.props;
+const rankDisplay = brand.rank <= 3 ? `TOP 0${brand.rank}` : `NO. ${brand.rank}`;
+---
+
+<article class="brand-card">
+  <div>
+    <div class="brand-card-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div style="width: 38px; height: 38px; border-radius: 10px; background: var(--color-primary); color: var(--color-gold); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; border: 1px solid var(--color-gold);">
+          {brand.name.slice(0, 1)}
+        </div>
+        <div>
+          <h3 class="brand-card-title">{brand.name}</h3>
+          <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600;">{brand.lineType}</span>
+        </div>
+      </div>
+      <span class={`rank-badge ${brand.rank === 1 ? 'top1' : ''}`}>
+        {rankDisplay}
+      </span>
+    </div>
+
+    <p class="brand-card-desc">
+      {brand.description || brand.tagline}
+    </p>
+
+    <!-- Pricing Block -->
+    <div class="brand-card-pricing">
+      <div class="price-unit-block">
+        <span class="price-unit-label">月付起步</span>
+        <div class="price-unit-val">
+          {brand.minMonthlyPrice ? `¥${brand.minMonthlyPrice}` : '无月付'}
+          {brand.minMonthlyPrice && <span>/月</span>}
+        </div>
+      </div>
+      <div style="width: 1px; height: 28px; background: var(--color-border);" aria-hidden="true"></div>
+      <div class="price-unit-block">
+        <span class="price-unit-label">年付起步</span>
+        <div class="price-unit-val" style="color: var(--color-gold);">
+          {brand.minYearlyPrice ? `¥${brand.minYearlyPrice}` : '无年付'}
+          {brand.minYearlyPrice && <span>/年</span>}
+        </div>
+      </div>
+      <div style="width: 1px; height: 28px; background: var(--color-border);" aria-hidden="true"></div>
+      <div class="price-unit-block">
+        <span class="price-unit-label">在售规格</span>
+        <div class="price-unit-val" style="font-size: 1.1rem; color: var(--color-text-main);">
+          {brand.plansCount} 档
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature Pills -->
+    <div class="brand-feature-pills">
+      {brand.highlightFeatures ? (
+        brand.highlightFeatures.slice(0, 3).map(f => (
+          <span class="feature-pill">{f}</span>
+        ))
+      ) : (
+        <>
+          <span class="feature-pill">{brand.lineType}</span>
+          <span class="feature-pill">{brand.plansCount}档套餐</span>
+        </>
+      )}
+      {brand.hasLifetimePlans && <span class="feature-pill" style="background: var(--color-gold-light); color: #7A5B20;">不限时包</span>}
+    </div>
+  </div>
+
+  <div class="brand-card-actions">
+    <a href={`/airports/${brand.slug}/`} class="btn btn-outline btn-sm">
+      品牌详情
+    </a>
+    <a href={brand.purchaseUrl} target="_blank" rel="sponsored nofollow noopener" class="btn btn-primary btn-sm">
+      前往购买 →
+    </a>
+  </div>
+</article>

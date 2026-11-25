@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '百元以内年付', url: '/plans/under-100-yearly/' }
+];
+---
+
+<BaseLayout
+  title="2026百元以内年付机场套餐推荐：¥96/年、¥99/年超低价专线小包汇总｜机场精选"
+  description="精选年费在100元及以内的超值年付小包：灵动云穿云IPLC专线（¥99/年，70GB/月）、大佬云年付活动包（¥96/年，60GB/月）等方案对比。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/under-100-yearly/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">百元以内年付</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">ULTRA LOW ANNUAL BUDGET</div>
+      <h1 class="section-title">2026 百元以内年付机场精选</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        折合月均仅需 8 元左右即可享用稳定专线网络。适合学生、轻办公及备用查件用户。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        百元年付小包核心看点
+      </h2>
+      <p>
+        例如灵动云的“穿云（IPLC 专线）”套餐（¥99/年，每 30 天刷新 70GB 流量），以及大佬云的“年付活动包”（¥96/年，每月刷新 60GB 流量）。低总价且享受与主力套餐相同的专线出口，性价比非常突出。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="under-100-yearly" showFilters={true} />
+  </div>
+</BaseLayout>

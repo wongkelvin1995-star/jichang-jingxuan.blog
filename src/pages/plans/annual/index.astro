@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '年付套餐', url: '/plans/annual/' }
+];
+---
+
+<BaseLayout
+  title="2026年付机场套餐推荐：长周期超值优惠与折算单月成本对比｜机场精选"
+  description="汇集全部18个品牌在售年付套餐价格、流量与折算单月价格。解析灵动云穿云包（¥99/年）、大佬云年付包（¥96/年）及暮光加速年付专线。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/annual/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">年付套餐</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">ANNUAL SUBSCRIPTION PLANS</div>
+      <h1 class="section-title">2026 年付机场套餐精选与对比</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        年付套餐通常享有相较于月付 75 折至 85 折的直接优惠，折算单月成本大幅下降，适合网络需求稳定的长期用户。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        年付选购注意事项
+      </h2>
+      <p>
+        年付套餐必须一次性付清全年费用，单笔支出相对较高。务必先确认该品牌在本地网络已稳定试用过 1–2 个月，并确保其运营口碑平稳，切忌对完全未经试水的新品牌直接盲目重金长周期上车。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="annual" showFilters={true} />
+  </div>
+</BaseLayout>

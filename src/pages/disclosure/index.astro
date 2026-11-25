@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '推广关系披露', url: '/disclosure/' }
+];
+---
+
+<BaseLayout
+  title="推广关系与收益披露 - 联盟营销（AFF）与商业赞助声明｜机场精选"
+  description="机场精选（Airport Select）透明公开网站与推荐机场服务商之间的商业推广与联盟返佣机制，保障用户知情权与推荐公正性。"
+  canonicalUrl="https://jichang-jingxuan.blog/disclosure/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="article-reader-container">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">推广关系披露</span>
+    </nav>
+
+    <header style="margin-bottom: 36px; text-align: center;">
+      <div class="section-eyebrow">AFFILIATE DISCLOSURE</div>
+      <h1 class="article-main-title">商业推广与联盟关系公开披露</h1>
+      <p style="font-size: 1.05rem; color: var(--color-text-muted);">
+        坚持完全透明，保障广大读者的知情权与消费决策权
+      </p>
+    </header>
+
+    <div class="article-prose">
+      <h2>一、联盟推广（Affiliate Marketing）声明</h2>
+      <p>
+        <strong>机场精选（Airport Select）</strong> 始终坚持公开透明的运营原则。为了维持本站高防服务器租用、Cloudflare CDN 费用、域名续费以及内容采编团队的持续运转，本站的正文卡片与表格操作栏中包含<strong>商业联盟推广链接（通常带有邀请码或 AFF 参数）</strong>。
+      </p>
+      <p>
+        当您通过本站提供的链接前往第三方机场官网并成功注册或选购套餐时，本站运营方可能会从对应服务商处获得少量的推广返佣。
+      </p>
+
+      <h2>二、返佣机制对用户购买价格的影响</h2>
+      <p>
+        <strong>绝对不会增加您的购买成本：</strong> 商业返佣是由服务商从其正常利润中支付给推荐方的市场推广费用。您通过本站链接购买套餐的价格，与您直接在浏览器中输入官方主域名进入结账页的价格<strong>完全一致</strong>；不仅如此，借助本站提供的专属优惠码（如灵动云【ld888】享 8 折、大佬云【dly888】享 7 折），您的实际支付金额往往比官方原价更加优惠。
+      </p>
+
+      <h2>三、商业推广与内容客观性的防火墙</h2>
+      <p>
+        部分读者可能会担忧：既然存在推广合作，内容推荐是否会失去公正性？我们的准则非常明确：
+      </p>
+      <ul>
+        <li><strong>不接受有劣迹的作坊式机场：</strong> 凡是有过恶意扣量、工单长期失联或严重超售恶名的小作坊，即使开出极高的佣金比例，本站一律拒绝收录与展示。</li>
+        <li><strong>完整呈现产品局限：</strong> 我们在每个品牌详情页中均清晰标注了其“使用局限与注意事项”（如不开放 Clash 订阅、不提供免费试用等），杜绝片面吹捧。</li>
+        <li><strong>支持无返佣或低返佣的平价品牌：</strong> 只要某个套餐切实对用户有价值（如百元以内的极低预算小包），即使返佣极少甚至没有返佣，我们依然如实收录并在专题中推荐。</li>
+      </ul>
+
+      <h2>四、推荐购买链接技术属性说明</h2>
+      <p>
+        依据主流搜索引擎（如 Bing）的站长合规规范，本站所有商业推广外链均配置了合规的 HTML 属性：
+      </p>
+      <pre style="background: var(--color-bg); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); font-family: var(--font-mono); font-size: 0.85rem; overflow-x: auto;">rel="sponsored nofollow noopener"</pre>
+      <p>
+        我们绝不采用隐蔽自动弹窗跳转、恶意点击劫持或伪装成普通学术链接的欺骗性跳转手段。所有外链均需由读者自主主动点击触发。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

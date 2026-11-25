@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '不限时流量套餐', url: '/plans/lifetime/' }
+];
+---
+
+<BaseLayout
+  title="2026不限时流量机场套餐：一次性买断、永不过期、低频备用首选｜机场精选"
+  description="汇总在售不限时流量包：灵动云闲云包（¥199/150GB）、暮光加速轻量包、微风网络及浪网一次性买断方案，流量用完即止，告别月度清零。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/lifetime/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">不限时流量套餐</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">NON-EXPIRING DATA PACKS</div>
+      <h1 class="section-title">2026 不限时流量机场套餐推荐</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        一次购买，流量用完即止，永不月度清零。专为低频查阅学术资料、外贸偶尔回信或作为主梯子备用线路设计。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        不限时流量包适合谁？
+      </h2>
+      <p>
+        常规周期套餐未用完的流量会在月末被强制重置，对于平时用量极小的用户（每月仅用 10GB–20GB）极不划算。选择 100–200GB 的一次性买断包，甚至可以用上一两年，综合成本极低。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="lifetime" showFilters={true} />
+  </div>
+</BaseLayout>

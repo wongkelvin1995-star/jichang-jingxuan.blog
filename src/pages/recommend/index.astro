@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+const topBrands = brands.slice(0, 6);
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场推荐指南', url: '/recommend/' }
+];
+---
+
+<BaseLayout
+  title="2026机场推荐：如何选择适合自己的优质机场？选购指南与核心指标｜机场精选"
+  description="2026年最新机场选购推荐指南：全面解析挑选机场的关键指标，包括IEPL专线、BGP智能调度、全节点1x倍率、客户端兼容性以及晚高峰抗拥堵测试经验。"
+  canonicalUrl="https://jichang-jingxuan.blog/recommend/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">机场推荐指南</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">BUYER'S GUIDE · 2026</div>
+      <h1 class="section-title">2026 机场推荐与选购决策指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        挑选一个好机场不只看跑分与峰值带宽，更要考察全天候稳定性、计费倍率是否诚实、以及节点路由冗余策略。
+      </p>
+    </header>
+
+    <!-- Editorial Prose Section -->
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.45rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        挑选优质机场的五大金法则
+      </h2>
+      <div style="display: flex; flex-direction: column; gap: 16px; font-size: 1rem; line-height: 1.85;">
+        <p>
+          <strong>一、优先选择专线架构（IEPL / IPLC）：</strong>普通直连线路或简陋中转极易受骨干网出口拥堵影响。IEPL/IPLC 内网专线在出境段绕过公网防火墙波动，保证晚高峰（20:00–23:00）的极低丢包率与稳定延迟。
+        </p>
+        <p>
+          <strong>二、拒绝高倍率暗扣陷阱：</strong>部分不良服务商标注大流量低资费，实则常用节点普遍按 2.0x 甚至 3.0x 倍率扣量。本站重点推荐的灵动云、大佬云、微风网络等品牌均坚持全节点 1.0x 统一计费，流量明明白白。
+        </p>
+        <p>
+          <strong>三、新手务必“先月付后年付”：</strong>不同地区运营商（电信、联通、移动）对机场入口服务器的握手延迟大相径庭。新用户首月建议选择 20 元左右的月付套餐，实地验证无误后再考虑长周期折扣。
+        </p>
+        <p>
+          <strong>四、确认客户端兼容政策：</strong>若习惯使用 Clash、Mihomo 或 Shadowrocket，购前应确认该品牌是否开放第三方订阅或仅支持专用官方客户端。
+        </p>
+        <p>
+          <strong>五、理性看待流媒体与 AI 解锁宣传：</strong>Netflix 与 OpenAI 对数据中心 IP 的封锁属于动态风控，合规服务商只能通过定期更换干净出口降低受限概率，不可盲信所谓的“100% 永久全解锁”。
+        </p>
+      </div>
+    </div>
+
+    <!-- Recommended Top 6 Brands -->
+    <div style="margin-bottom: 60px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary);">本期重点推荐精选品牌</h2>
+          <p style="font-size: 0.92rem; color: var(--color-text-muted);">综合专线质量、计费透明度与性价比甄选的六大代表性品牌：</p>
+        </div>
+        <a href="/ranking/" class="btn btn-outline btn-sm">查看完整排行榜 →</a>
+      </div>
+      <div class="brands-grid">
+        {topBrands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <!-- Table of plans -->
+    <div>
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px; text-align: center;">
+        精选推荐套餐实时对比
+      </h2>
+      <PlanTable limit={15} showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

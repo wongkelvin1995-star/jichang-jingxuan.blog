@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import articles from '../../data/articles.json';
+
+const categories = ['全部', '机场推荐', '套餐指南', '新手入门', '避坑指南', '流量科普', '客户端教程', 'AI应用', '流媒体'];
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '精选文章', url: '/articles/' }
+];
+---
+
+<BaseLayout
+  title="2026机场精选原创文章与选购指南大全（30篇完整索引）｜机场精选"
+  description="机场精选原创文章专栏：涵盖机场选型、稳定专线科普、低预算月付、套餐横向对比、ChatGPT/流媒体解锁及Clash配置教学等30篇深度选购指南。"
+  canonicalUrl="https://jichang-jingxuan.blog/articles/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <!-- Breadcrumb Nav -->
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">精选文章专栏</span>
+    </nav>
+
+    <!-- Header Intro -->
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">THE SELECT JOURNAL ARCHIVE</div>
+      <h1 class="section-title">2026 机场精选文章专栏</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        收录第一阶段全部 30 篇深度原创指南。从套餐性价比计算到专线线路科普，为你提供清晰、客观、可追溯的决策参考。
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="topics-chips-bar" style="justify-content: center;" id="article-filter-pills">
+        {categories.map((cat, idx) => (
+          <button class={`topic-chip ${idx === 0 ? 'active' : ''}`} data-cat={cat}>
+            {cat}
+          </button>
+        ))}
+      </div>
+    </header>
+
+    <!-- 3-Column Articles Grid -->
+    <div class="articles-grid" id="articles-container">
+      {articles.map(art => (
+        <article class="article-card" data-category={art.category}>
+          <div class="article-card-cover">
+            <img
+              src={art.cover || `/images/articles/${art.slug}.jpg`}
+              alt={art.title}
+              loading="lazy"
+              decoding="async"
+              class="article-cover-img"
+            />
+            <div class="article-cover-overlay"></div>
+            <span class="article-cover-badge">{art.category}</span>
+          </div>
+          <div class="article-card-body">
+            <div class="article-meta-row">
+              <span>{art.date}</span>
+              <span>•</span>
+              <span>{art.readTime}</span>
+            </div>
+            <h2 class="article-card-title" style="font-size: 1.25rem;">
+              <a href={`/articles/${art.slug}/`} style="color: var(--color-primary);">
+                {art.title}
+              </a>
+            </h2>
+            <p class="article-card-excerpt">
+              {art.excerpt}
+            </p>
+            <div style="margin-top: auto; padding-top: 16px;">
+              <a href={`/articles/${art.slug}/`} class="article-read-btn">
+                <span>阅读全文</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const pills = document.querySelectorAll('#article-filter-pills button');
+    const cards = document.querySelectorAll('#articles-container .article-card');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        const cat = pill.getAttribute('data-cat');
+        cards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (cat === '全部' || cardCat === cat) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

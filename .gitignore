@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# astro / vite caches
+.astro/
+
+# production build output (Cloudflare Pages builds from source)
+dist/
+
+# local tooling
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db

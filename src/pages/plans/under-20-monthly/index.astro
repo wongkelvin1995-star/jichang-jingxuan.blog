@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '20元及以下月付', url: '/plans/under-20-monthly/' }
+];
+---
+
+<BaseLayout
+  title="2026每月20元及以下机场套餐推荐：高性价比低门槛月订精选｜机场精选"
+  description="精选每月20元及以内的平价优质机场套餐：大佬云（¥19.99/月，120GB）、灵动云拂风（¥20/月，100GB）、飞猫云等方案横向对比。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/under-20-monthly/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">20元及以下月付</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">BUDGET MONTHLY PLANS</div>
+      <h1 class="section-title">2026 每月 20 元及以下机场套餐推荐</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        个人用户的黄金月付价格区间。一杯咖啡的价钱即可获得 100GB–150GB 充足流量与主流专线连接。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        20 元档位套餐如何挑选？
+      </h2>
+      <p>
+        重点核实该档位在晚高峰期间的单节点限速与连接倍率。如大佬云“初云·福利版”售价 ¥19.99/月（120GB），全节点 1x 倍率不限设备，是低预算试水的首选之一。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="under-20-monthly" showFilters={true} />
+  </div>
+</BaseLayout>

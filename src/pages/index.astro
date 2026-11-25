@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import EditorPicks from '../components/EditorPicks.astro';
+import BrandCard from '../components/BrandCard.astro';
+import PlanTable from '../components/PlanTable.astro';
+import FaqSection from '../components/FaqSection.astro';
+import brands from '../data/brands.json';
+import articles from '../data/articles.json';
+
+const featuredArticles = articles.slice(0, 6);
+
+const topics = [
+  { name: '百元以内年付', href: '/plans/under-100-yearly/' },
+  { name: '20元及以下月付', href: '/plans/under-20-monthly/' },
+  { name: '30元以内月付', href: '/plans/under-30-monthly/' },
+  { name: '30–60元月付', href: '/plans/30-60-monthly/' },
+  { name: '高性价比套餐', href: '/value-airports/' },
+  { name: '大流量机场套餐', href: '/plans/large-traffic/' },
+  { name: '不限时流量套餐', href: '/plans/lifetime/' },
+  { name: '高端定制套餐', href: '/premium-airports/' },
+  { name: '新手入门套餐', href: '/guides/' },
+  { name: '长期使用套餐', href: '/plans/annual/' },
+];
+---
+
+<BaseLayout
+  title="2026机场精选 - 优质机场推荐、稳定机场与高性价比机场选购指南"
+  description="机场精选汇集18个热门机场品牌及142条套餐记录，提供机场推荐、套餐价格对比、便宜机场、Clash机场及科学上网选购指南，帮助用户根据预算和使用需求选择适合自己的机场服务。"
+  canonicalUrl="https://jichang-jingxuan.blog/"
+>
+  <!-- 模块一：Hero 品牌开场 -->
+  <Hero />
+
+  <!-- 模块二：本期精选 -->
+  <EditorPicks />
+
+  <!-- 模块三：精选品牌推荐 -->
+  <section class="section" id="brands-collection">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div class="section-eyebrow">PREMIUM AIRPORT COLLECTION</div>
+          <h2 class="section-title">2026精选机场品牌推荐</h2>
+          <p class="section-subtitle" style="margin-bottom: 0;">
+            收录全部 18 个主流品牌，严格按站长指定编辑推荐顺序排布，所有购买入口均完整保留官方 AFF 参数。
+          </p>
+        </div>
+        <div>
+          <a href="/airports/" class="btn btn-outline" style="font-size: 0.9rem;">
+            查看品牌大全 (18) →
+          </a>
+        </div>
+      </div>
+
+      <div class="brands-grid">
+        {brands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 模块四：套餐指南与价格对比 -->
+  <section class="section" id="plans-guide" style="background: #F5F2EB; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <div class="section-eyebrow">FIND YOUR PERFECT PLAN</div>
+        <h2 class="section-title">热门机场套餐价格对比</h2>
+        <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+          涵盖月付、季付、年付与不限时买断共 142 条真实记录。支持按周期、品牌即时过滤与价格升降序排列。
+        </p>
+
+        <!-- 专题快速导航 -->
+        <div style="margin-bottom: 36px;">
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px;">
+            根据预算选择适合自己的机场
+          </h2>
+          <div class="topics-chips-bar" style="justify-content: center;">
+            {topics.map(t => (
+              <a href={t.href} class="topic-chip">
+                <span>{t.name}</span>
+                <span style="font-size: 0.8rem; color: var(--color-gold);">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Plan Table Component with interactive filtering & SSG pre-rendered HTML -->
+      <PlanTable showFilters={true} defaultCycle="annual" />
+    </div>
+  </section>
+
+  <!-- 模块五：最新精选文章 -->
+  <section class="section" id="journal">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div class="section-eyebrow">THE SELECT JOURNAL</div>
+          <h2 class="section-title">最新精选文章与机场选购指南</h2>
+          <p class="section-subtitle" style="margin-bottom: 0;">
+            提供原创实用的选购决策分析、线路技术剖析、常见网络故障排查与客户端避坑指南。
+          </p>
+        </div>
+        <div>
+          <a href="/articles/" class="btn btn-outline" style="font-size: 0.9rem;">
+            阅读全部文章 (30) →
+          </a>
+        </div>
+      </div>
+
+      <div class="articles-grid">
+        {featuredArticles.map(art => (
+          <article class="article-card">
+            <div class="article-card-cover">
+              <img
+                src={art.cover || `/images/articles/${art.slug}.jpg`}
+                alt={art.title}
+                loading="lazy"
+                decoding="async"
+                class="article-cover-img"
+              />
+              <div class="article-cover-overlay"></div>
+              <span class="article-cover-badge">{art.category}</span>
+            </div>
+            <div class="article-card-body">
+              <div class="article-meta-row">
+                <span>{art.date}</span>
+                <span>•</span>
+                <span>{art.readTime}</span>
+              </div>
+              <h3 class="article-card-title">
+                <a href={`/articles/${art.slug}/`} style="color: var(--color-primary);">
+                  {art.title}
+                </a>
+              </h3>
+              <p class="article-card-excerpt">
+                {art.excerpt}
+              </p>
+              <div style="margin-top: auto; padding-top: 16px;">
+                <a href={`/articles/${art.slug}/`} class="article-read-btn">
+                  <span>阅读全文</span>
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 模块六：FAQ -->
+  <FaqSection />
+</BaseLayout>

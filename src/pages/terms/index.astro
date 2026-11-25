@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '网站使用条款', url: '/terms/' }
+];
+---
+
+<BaseLayout
+  title="网站使用条款 - 访问协议、知识产权与法律免责声明｜机场精选"
+  description="机场精选（Airport Select）网站使用条款：明确本站内容的参考性质、知识产权声明、第三方服务免责与合规使用约定。"
+  canonicalUrl="https://jichang-jingxuan.blog/terms/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="article-reader-container">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">使用条款</span>
+    </nav>
+
+    <header style="margin-bottom: 36px; text-align: center;">
+      <div class="section-eyebrow">TERMS OF SERVICE</div>
+      <h1 class="article-main-title">机场精选网站使用条款</h1>
+      <p style="font-size: 0.95rem; color: var(--color-text-muted);">
+        生效日期：2026年11月24日 · 版本号：v2026.1
+      </p>
+    </header>
+
+    <div class="article-prose">
+      <h2>一、服务性质与协议接受</h2>
+      <p>
+        欢迎访问 <strong>机场精选（Airport Select，https://jichang-jingxuan.blog/）</strong>。当您浏览、查阅或使用本网站提供的任何文章、榜单、数据对比表格及外链时，即代表您已阅读、理解并同意遵守本使用条款的所有约定。
+      </p>
+
+      <h2>二、信息参考与非担保声明</h2>
+      <p>
+        本站提供的所有机场品牌介绍、套餐价格、线路类型及设备兼容性说明，均基于截至核实日期（2026-11-23）公开可查阅的资料整理而成。尽管我们尽最大努力保障信息的客观与及时更新，但：
+      </p>
+      <ul>
+        <li><strong>本站不作任何形式的明示或暗示担保：</strong> 包括但不限于特定机场在您本地网络的必然稳定性、永久连通性、特定流媒体必然解锁或无跑路风险。</li>
+        <li><strong>最终价格以第三方结算页为准：</strong> 第三方机场品牌可能在未提前通知的情况下调整套餐价格或停用优惠码，交易行为完全发生于您与第三方服务商之间。</li>
+      </ul>
+
+      <h2>三、合规合法使用承诺</h2>
+      <p>
+        访客使用本站信息及通过本站链接选购的网络代理服务，必须严格遵守您所在国家和地区的现行法律法规。科学上网服务仅限个人查阅科研学术文献、技术文档、合法跨境电子商务及合规社交交流，严禁用于任何危害网络安全、从事违法犯罪或侵犯他人合法权益的活动。
+      </p>
+
+      <h2>四、知识产权保护</h2>
+      <p>
+        本站所有原创文章、栏目架构、UI 视觉设计体系及结构化对比数据格式，均属于机场精选（Airport Select）团队的知识产权。未经本站明确书面许可，严禁使用爬虫进行大规模批量恶意抓取、洗稿或用于商业站群镜像搭建。
+      </p>
+
+      <h2>五、责任限制与免责条款</h2>
+      <p>
+        在法律允许的最大范围内，因第三方机场服务商出现线路中断、服务器维护、技术故障、政策阻断、甚至服务商终止运营所导致的任何直接或间接财产损失，本站均不承担任何连带法律责任。我们强烈倡导用户坚持“先月付后年付”的风险防范意识。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

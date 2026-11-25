@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+const aiBrands = brands.filter(b => b.streamingAi.chatgpt.includes('支持') || b.streamingAi.chatgpt.includes('原生') || b.streamingAi.chatgpt.includes('适配')).slice(0, 6);
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: 'AI机场指南', url: '/ai-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026 AI机场推荐：ChatGPT、Claude与海外AI工具稳定访问指南｜机场精选"
+  description="如何解决 ChatGPT Access Denied 或 Claude 频繁封号问题？精选原生IP节点丰富、新加坡与日本干净出口的 AI 工具专用机场方案。"
+  canonicalUrl="https://jichang-jingxuan.blog/ai-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">AI机场指南</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">ARTIFICIAL INTELLIGENCE ACCELERATION</div>
+      <h1 class="section-title">2026 AI 生产力工具机场推荐</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        专为 ChatGPT、Claude 3.5 Sonnet、Midjourney 等生成式 AI 优化的节点选购与防风控指南。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        访问 ChatGPT 与 Claude 为什么对节点要求格外苛刻？
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          OpenAI 与 Anthropic 引入了极为严密的欺诈与滥用防护系统（如 Cloudflare Turnstile、IP 欺诈度评分）。普通的机房 IDC IP（数据中心 IP）往往被标记为高风险，直接返回 403 Forbidden 或报错无法生成。
+        </p>
+        <p>
+          能够稳定连接 AI 工具的机场通常具备两大特征：<strong>拥有原生双 ISP 住宅或广播干净 IP 资源</strong>，以及<strong>长期对新加坡、日本、美国节点出口进行动态健康检测与清洗</strong>。
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        对海外主流 AI 工具适配良好的代表品牌
+      </h2>
+      <div class="brands-grid">
+        {aiBrands.map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        适合 AI 交互的精选套餐方案
+      </h2>
+      <PlanTable limit={12} showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

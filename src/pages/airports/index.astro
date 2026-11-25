@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import brands from '../../data/brands.json';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '机场品牌大全', url: '/airports/' }
+];
+---
+
+<BaseLayout
+  title="2026机场品牌大全 - 18个精选机场服务特点与套餐价格汇总｜机场精选"
+  description="汇总2026年18个热门机场品牌：灵动云、暮光加速、微风网络、飞猫云、大佬云等，提供各品牌线路架构、价格区间、客户端支持及选购指南。"
+  canonicalUrl="https://jichang-jingxuan.blog/airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumb-nav" aria-label="面包屑路径导航">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">机场品牌大全</span>
+    </nav>
+
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 50px auto;">
+      <div class="section-eyebrow">ALL AIRPORT DIRECTORY</div>
+      <h1 class="section-title">2026 机场品牌大全</h1>
+      <p class="section-subtitle" style="margin: 0 auto;">
+        汇集 18 个主流机场品牌的官方数据与真实套餐记录。每一个品牌均配备独立资料详情页与多维度评测建议。
+      </p>
+    </div>
+
+    <div class="brands-grid">
+      {brands.map(b => (
+        <BrandCard brand={b} />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

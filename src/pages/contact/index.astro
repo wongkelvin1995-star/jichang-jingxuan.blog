@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '联系与纠错', url: '/contact/' }
+];
+---
+
+<BaseLayout
+  title="联系我们与数据纠错通道 - 机场精选编辑部｜机场精选"
+  description="欢迎读者与服务商针对机场精选收录的套餐价格、优惠码、客户端政策进行信息勘误与数据纠错。我们将在48小时内复核更新。"
+  canonicalUrl="https://jichang-jingxuan.blog/contact/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="article-reader-container">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">联系与纠错</span>
+    </nav>
+
+    <header style="margin-bottom: 36px; text-align: center;">
+      <div class="section-eyebrow">FEEDBACK & CORRECTIONS</div>
+      <h1 class="article-main-title">联系我们与数据勘误通道</h1>
+      <p style="font-size: 1.05rem; color: var(--color-text-muted);">
+        共同维护客观、准确、实时的机场套餐资料库
+      </p>
+    </header>
+
+    <div class="article-prose">
+      <h2>一、数据勘误与纠错机制</h2>
+      <p>
+        由于各大机场服务商的在售套餐、价格变动、活动优惠码有效性及客户端政策（如是否开放第三方订阅）会随着网络运维不定期调整，本站可能存在信息更新延后的情况。
+      </p>
+      <p>
+        如果您在使用过程中发现以下任何情况，欢迎随时向编辑部反馈：
+      </p>
+      <ul>
+        <li>某品牌的某个套餐价格已调价或已下架。</li>
+        <li>某优惠码已过期失效，或有新的官方促销代码发布。</li>
+        <li>某品牌客户端下载通道发生变更，或新增了系统支持。</li>
+        <li>某个官方跳转链接失效或遭遇域名阻断。</li>
+      </ul>
+      <p>
+        编辑团队将在收到勘误反馈后的 <strong>24–48 小时内</strong>完成官方结账页的复核，并在全站数据库（brands.json / plans.json）中完成热更新发布。
+      </p>
+
+      <h2>二、官方联络方式</h2>
+      <div style="background: var(--color-bg); padding: 28px; border-radius: var(--radius-md); border: 1px solid var(--color-border); margin: 24px 0;">
+        <div style="font-size: 1.1rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px;">编辑部联络邮箱：</div>
+        <p style="font-family: var(--font-mono); font-size: 1.15rem; color: var(--color-gold); font-weight: 700; margin-bottom: 12px;">
+          editor@jichang-jingxuan.blog
+        </p>
+        <p style="font-size: 0.88rem; color: var(--color-text-muted);">
+          （邮件主题请注明：【数据纠错】或【品牌咨询】+ 对应品牌名称）
+        </p>
+      </div>
+
+      <h2>三、服务商入驻与资料收录准则</h2>
+      <p>
+        如果您是正规机场品牌运营方并希望被本站收录，需满足以下基础准入条件：
+      </p>
+      <ul>
+        <li>运营时间稳定，拥有成熟的工单或客服支持团队。</li>
+        <li>计费规则清晰，全节点统一倍率（拒绝恶意扣量）。</li>
+        <li>具备真实出海线路架构（IEPL/IPLC 或优质 BGP 多线）。</li>
+        <li>提供清晰的在售套餐参数与价格文档。</li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

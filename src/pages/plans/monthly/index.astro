@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PlanTable from '../../../components/PlanTable.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐指南', url: '/plans/' },
+  { name: '月付套餐', url: '/plans/monthly/' }
+];
+---
+
+<BaseLayout
+  title="2026月付机场套餐推荐：低试错成本、灵活续费与高性价比月订方案｜机场精选"
+  description="精选在售优质月付机场套餐：最低月付¥15–¥20起步，随用随充，最大程度降低断连与跑路风险，新手入门与多梯子备用必读指南。"
+  canonicalUrl="https://jichang-jingxuan.blog/plans/monthly/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <a href="/plans/">套餐指南</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">月付套餐</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">MONTH-TO-MONTH PLANS</div>
+      <h1 class="section-title">2026 优质月付机场套餐精选</h1>
+      <p class="section-subtitle" style="margin: 0 auto 24px auto;">
+        按月付费是控制试错成本的利器。随时根据自身需求、线路质量及出差安排灵活调整套餐。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 28px; max-width: 960px; margin: 0 auto 40px auto; font-size: 0.98rem; line-height: 1.8;">
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary); margin-bottom: 12px; border-left: 4px solid var(--color-gold); padding-left: 10px;">
+        为什么强烈建议新手优先月付？
+      </h2>
+      <p>
+        科学上网的稳定性很大程度上取决于“本地运营商出口与机房入口的握手机制”。月付只需花费 15–25 元即可对该品牌进行为期 30 天的深度晚高峰实测，合适再续订，不合适随时更换，资金零负担。
+      </p>
+    </div>
+
+    <PlanTable initialFilter="monthly" showFilters={true} />
+  </div>
+</BaseLayout>

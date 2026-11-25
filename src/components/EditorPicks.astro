@@ -1,0 +1,163 @@
+---
+import brands from '../data/brands.json';
+
+const lingdong = brands.find(b => b.slug === 'lingdongyun')!;
+const twilight = brands.find(b => b.slug === 'twilight')!;
+const breezenet = brands.find(b => b.slug === 'breezenet')!;
+---
+
+<section class="section" style="background: #F4F0E8; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <div class="section-eyebrow">EDITOR'S SELECTION</div>
+      <h2 class="section-title">本期精选机场品牌</h2>
+      <p class="section-subtitle" style="margin: 0 auto;">
+        编辑部结合线路架构、套餐性价比、客户端支持政策与多周期灵活性，甄选出当前最具代表性的品牌。
+      </p>
+    </div>
+
+    <div class="editors-grid">
+      <!-- Main Feature: Lingdongyun (TOP 01) -->
+      <article class="editor-card-featured">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+            <span class="rank-badge top1" style="font-size: 0.9rem; padding: 6px 14px;">
+              TOP 01 · 本期重点推荐
+            </span>
+            <span style="font-size: 0.75rem; color: #BAC2D0; letter-spacing: 0.1em; text-transform: uppercase;">
+              FLAGSHIP PICK
+            </span>
+          </div>
+
+          <h3 style="font-size: 2.25rem; font-weight: 900; color: #FFFFFF; margin-bottom: 12px; letter-spacing: -0.02em;">
+            {lingdong.name}
+          </h3>
+
+          <p style="font-size: 1.05rem; line-height: 1.7; color: #BAC2D0; margin-bottom: 28px;">
+            {lingdong.description}
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: rgba(255, 255, 255, 0.06); padding: 18px 22px; border-radius: var(--radius-md); border: 1px solid rgba(201, 171, 118, 0.25); margin-bottom: 28px;">
+            <div>
+              <div style="font-size: 0.75rem; color: #BAC2D0;">入门起步月付</div>
+              <div style="font-size: 1.6rem; font-weight: 900; color: var(--color-gold);">¥{lingdong.minMonthlyPrice} <span style="font-size: 0.85rem; color: #BAC2D0; font-weight: normal;">/ 月起</span></div>
+            </div>
+            <div>
+              <div style="font-size: 0.75rem; color: #BAC2D0;">超值轻量年付</div>
+              <div style="font-size: 1.6rem; font-weight: 900; color: #FFFFFF;">¥{lingdong.minYearlyPrice} <span style="font-size: 0.85rem; color: #BAC2D0; font-weight: normal;">/ 年</span></div>
+            </div>
+          </div>
+
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; font-size: 0.92rem; color: #DDE2EC;">
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <span style="color: var(--color-gold);">✓</span> 全节点 1.0 倍率计费，IEPL / IPLC 专线调度
+            </li>
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <span style="color: var(--color-gold);">✓</span> 覆盖月付、年付（穿云小包）及三档一次性不限时流量包
+            </li>
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <span style="color: var(--color-gold);">✓</span> 提供多端官方客户端，破晓/凌霄高级套餐支持申请第三方订阅
+            </li>
+          </ul>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: auto;">
+          <a href={`/airports/${lingdong.slug}/`} class="btn btn-outline" style="border-color: rgba(255, 255, 255, 0.3); color: #FFFFFF;">
+            查看品牌详情
+          </a>
+          <a href={lingdong.purchaseUrl} target="_blank" rel="sponsored nofollow noopener" class="btn btn-gold">
+            前往购买 →
+          </a>
+        </div>
+      </article>
+
+      <!-- Sub Feature 1: Twilight (TOP 02) -->
+      <article class="editor-card-sub">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <span class="rank-badge" style="background: #E8E2D5; color: #624814;">TOP 02</span>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">BGP 智能调度</span>
+          </div>
+
+          <h3 style="font-size: 1.65rem; font-weight: 800; color: var(--color-primary); margin-bottom: 10px;">
+            {twilight.name}
+          </h3>
+
+          <p style="font-size: 0.92rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 20px;">
+            {twilight.description}
+          </p>
+
+          <div style="background: var(--color-bg); padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+              <span style="font-size: 0.8rem; color: var(--color-text-muted);">最低月付</span>
+              <span style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary);">¥{twilight.minMonthlyPrice} / 月</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-size: 0.8rem; color: var(--color-text-muted);">最低年付</span>
+              <span style="font-size: 1.25rem; font-weight: 800; color: var(--color-gold);">¥{twilight.minYearlyPrice} / 年</span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: var(--color-text-main); margin-bottom: 24px;">
+            <div>• 70GB/月 轻量年付 IPLC 专线配置</div>
+            <div>• 覆盖15+国家与地区节点</div>
+            <div>• 提供多档不限时流量储备包</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <a href={`/airports/${twilight.slug}/`} class="btn btn-outline btn-sm">
+            品牌详情
+          </a>
+          <a href={twilight.purchaseUrl} target="_blank" rel="sponsored nofollow noopener" class="btn btn-primary btn-sm">
+            前往购买
+          </a>
+        </div>
+      </article>
+
+      <!-- Sub Feature 2: BreezeNet (TOP 03) -->
+      <article class="editor-card-sub">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <span class="rank-badge" style="background: #E8E2D5; color: #624814;">TOP 03</span>
+            <span style="font-size: 0.75rem; color: var(--color-text-muted);">平价灵活</span>
+          </div>
+
+          <h3 style="font-size: 1.65rem; font-weight: 800; color: var(--color-primary); margin-bottom: 10px;">
+            {breezenet.name}
+          </h3>
+
+          <p style="font-size: 0.92rem; color: var(--color-text-muted); line-height: 1.6; margin-bottom: 20px;">
+            {breezenet.description}
+          </p>
+
+          <div style="background: var(--color-bg); padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+              <span style="font-size: 0.8rem; color: var(--color-text-muted);">最低月付</span>
+              <span style="font-size: 1.25rem; font-weight: 800; color: var(--color-primary);">¥{breezenet.minMonthlyPrice} / 月</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-size: 0.8rem; color: var(--color-text-muted);">最低年付</span>
+              <span style="font-size: 1.25rem; font-weight: 800; color: var(--color-gold);">¥{breezenet.minYearlyPrice} / 年</span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; color: var(--color-text-main); margin-bottom: 24px;">
+            <div>• 平价月付，流量与资费配比均衡</div>
+            <div>• 全节点 1.0 倍率计费无套路</div>
+            <div>• 主流流媒体与 AI 工具适配</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <a href={`/airports/${breezenet.slug}/`} class="btn btn-outline btn-sm">
+            品牌详情
+          </a>
+          <a href={breezenet.purchaseUrl} target="_blank" rel="sponsored nofollow noopener" class="btn btn-primary btn-sm">
+            前往购买
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

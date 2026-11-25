@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import plans from '../../data/plans.json';
+import brands from '../../data/brands.json';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '套餐横向对比', url: '/compare/' }
+];
+---
+
+<BaseLayout
+  title="2026机场套餐横向对比：18个品牌142条套餐价格、流量与资费大PK｜机场精选"
+  description="横向全维度套餐数据中心：支持按价格升序/降序、月付/年付/不限时分类、流量规模与品牌名称交叉筛选，142条套餐真实透明展示。"
+  canonicalUrl="https://jichang-jingxuan.blog/compare/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">套餐横向对比</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">HEAD-TO-HEAD MATRIX</div>
+      <h1 class="section-title">2026 机场套餐横向全量对比</h1>
+      <p class="section-subtitle" style="margin: 0 auto 20px auto;">
+        聚合 18 个品牌已核准的全部 142 条在售套餐记录。通过即时动态筛选与排序，直观对比价格、月折算、流量配额及适用设备。
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 20px; font-size: 0.88rem; color: var(--color-text-muted); flex-wrap: wrap;">
+        <span>✓ 已录入 18 个精选品牌</span>
+        <span>•</span>
+        <span>✓ 覆盖 142 条套餐明细</span>
+        <span>•</span>
+        <span>✓ 严格保留真实多周期价格</span>
+      </div>
+    </header>
+
+    <!-- Full Plan Table -->
+    <PlanTable showFilters={true} />
+  </div>
+</BaseLayout>

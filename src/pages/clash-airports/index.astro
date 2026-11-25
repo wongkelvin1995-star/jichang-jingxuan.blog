@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BrandCard from '../../components/BrandCard.astro';
+import PlanTable from '../../components/PlanTable.astro';
+import brands from '../../data/brands.json';
+
+const clashBrands = brands.filter(b => b.clientSupport.clash.includes('Clash') || b.clientSupport.clash.includes('第三方') || b.slug === 'flyv' || b.slug === 'wavenet' || b.slug === 'lingdongyun');
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: 'Clash机场推荐', url: '/clash-airports/' }
+];
+---
+
+<BaseLayout
+  title="2026 Clash机场推荐：Clash Verge/Mihomo订阅与第三方客户端兼容指南｜机场精选"
+  description="哪些机场支持导入 Clash？详尽解析 18 个品牌的第三方订阅规则，包括 FLYV、浪网、灵动云破晓/凌霄第三方订阅领取条件及配置教学。"
+  canonicalUrl="https://jichang-jingxuan.blog/clash-airports/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">Clash机场推荐</span>
+    </nav>
+
+    <header style="max-width: 860px; margin: 0 auto 50px auto; text-align: center;">
+      <div class="section-eyebrow">CLIENT COMPATIBILITY</div>
+      <h1 class="section-title">2026 Clash 机场推荐与订阅指南</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        厘清各大品牌的客户端开放政策。哪些品牌开箱即用支持通用订阅？哪些品牌需要官方客户端或特定套餐方能申请？一文全揭晓。
+      </p>
+    </header>
+
+    <div class="faq-card" style="padding: 36px; max-width: 960px; margin: 0 auto 50px auto;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px; border-left: 4px solid var(--color-gold); padding-left: 12px;">
+        为什么有些机场不直接公开 Clash 订阅链接？
+      </h2>
+      <div style="font-size: 1rem; line-height: 1.85; color: var(--color-text-main); display: flex; flex-direction: column; gap: 14px;">
+        <p>
+          许多资深玩家习惯使用开源成熟的 <strong>Clash Verge Rev、Mihomo Party、Shadowrocket</strong> 进行精细化的规则分流；但近年来不少机场出于<strong>防盗刷、防合租滥用与防止节点 IP 泄露</strong>的考量，转向自主封装的官方客户端。
+        </p>
+        <p>
+          例如<strong>灵动云</strong>明确规定：破晓、凌霄等中高阶套餐可联系客服领取专属第三方订阅；而普通套餐与大佬云等则主要推荐使用官方客户端登录。这种差异化管理保证了不同层级用户的网络纯净度。
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 24px;">
+        支持或兼容第三方代理配置的精选品牌
+      </h2>
+      <div class="brands-grid">
+        {clashBrands.slice(0, 6).map(b => (
+          <BrandCard brand={b} />
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary); margin-bottom: 20px;">
+        支持第三方导入的代表套餐对比
+      </h2>
+      <PlanTable limit={12} showFilters={true} />
+    </div>
+  </div>
+</BaseLayout>

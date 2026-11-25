@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '关于我们', url: '/about/' }
+];
+---
+
+<BaseLayout
+  title="关于我们 - 机场精选创立初衷、内容准则与团队使命｜机场精选"
+  description="了解机场精选（Airport Select）：致力于建立透明、真实、可追溯的机场品牌与套餐资料库，杜绝虚假测速跑分，坚持数据客观与选购实用主义。"
+  canonicalUrl="https://jichang-jingxuan.blog/about/"
+  breadcrumbs={breadcrumbs}
+>
+  <div class="article-reader-container">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">关于我们</span>
+    </nav>
+
+    <header style="margin-bottom: 36px; text-align: center;">
+      <div class="section-eyebrow">ABOUT AIRPORT SELECT</div>
+      <h1 class="article-main-title">关于机场精选 · Airport Select</h1>
+      <p style="font-size: 1.15rem; color: var(--color-gold); font-family: var(--font-serif); font-style: italic;">
+        精选好机场，每一次连接，都值得。
+      </p>
+    </header>
+
+    <div class="article-prose">
+      <h2>一、我们的创立初衷</h2>
+      <p>
+        在当下的中文互联网环境中，寻找一个稳定、靠谱、价格公道的机场网络服务，正在变得越来越困难。一方面，市场上充斥着大量虚假跑分截图、“99.99%永远在线”、“绝对不封”的夸张营销话术；另一方面，某些低劣服务商通过超售、暗扣倍率甚至“跑路”，极大损害了普通用户的权益与资金安全。
+      </p>
+      <p>
+        <strong>机场精选（Airport Select）</strong> 应运而生。我们的核心定位是：打造一个<strong>专注于机场品牌介绍、套餐价格对比、性价比分析与真实选购指南的专业内容平台</strong>。通过对各大品牌公开在售资料的持续追踪与结构化整理，为不同预算、不同终端及不同使用场景的中文用户提供清晰、中立、实用的决策参考。
+      </p>
+
+      <h2>二、本站的内容建设准则</h2>
+      <p>
+        为保障内容的严肃性与参考价值，编辑部始终坚守以下五条铁律：
+      </p>
+      <ul>
+        <li><strong>拒绝虚假跑分与测速造假：</strong> 瞬时千兆测速往往来自特定测试节点，与日常跨国拉取代码、观看视频的体验毫不相干。本站绝不编造虚假的带宽跑分与低延迟数据。</li>
+        <li><strong>数据透明可溯源：</strong> 所有套餐名称、价格、流量、折扣码及可用付款周期均来源于品牌官方发布记录，并清晰标明核实日期（如 2026-11-23），确保前台与结账页数据一致。</li>
+        <li><strong>明确区分自述与事实：</strong> 对品牌宣传的专线品质、流媒体解锁与 AI 支持，明确标注“依据品牌公开说明”，提醒用户海外平台风控的动态变化。</li>
+        <li><strong>客观揭示局限性：</strong> 每个品牌详情页均同时设立“主要优势”与“使用局限”，帮助用户在知情的前提下做出消费选择。</li>
+        <li><strong>坦诚公开商业关系：</strong> 网站部分跳转链接包含联盟推广返佣（AFF），我们明确公开这一合作模式，绝不将商业推荐伪装为客观权威认证。</li>
+      </ul>
+
+      <h2>三、我们不是什么</h2>
+      <p>
+        为了避免误解，我们在此严正声明：
+      </p>
+      <ul>
+        <li><strong>本站不是任何单一机场的官方网站：</strong> 我们不直接销售代理服务器，不代收用户节点充值费用，不负责任何第三方的售后技术支持。</li>
+        <li><strong>本站不是纯广告流量落地页：</strong> 我们不接受未经审查的低劣服务商软文投放，所有收录品牌均需经过资质初筛与套餐数据审核。</li>
+        <li><strong>本站不承诺绝对不会跑路：</strong> 科学上网行业存在不可抗力与运营波动，任何声称“100%永不跑路”的承诺都是不负责任的。我们通过推荐月付、排查高危特征等方式帮助用户规避风险。</li>
+      </ul>
+
+      <h2>四、网站核心信任架构</h2>
+      <div style="background: var(--color-bg); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--color-border); margin: 30px 0;">
+        <div style="font-weight: 800; color: var(--color-primary); margin-bottom: 12px;">信任机制与指引入口：</div>
+        <ul style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <li>了解我们的评估逻辑：<a href="/methodology/" style="color: var(--color-gold); text-decoration: underline;">精选标准与测评方法论</a></li>
+          <li>商业模式透明度披露：<a href="/disclosure/" style="color: var(--color-gold); text-decoration: underline;">推广关系与收益披露</a></li>
+          <li>数据变动或纠错反馈：<a href="/contact/" style="color: var(--color-gold); text-decoration: underline;">联系与数据纠错通道</a></li>
+          <li>了解您的信息权益：<a href="/privacy/" style="color: var(--color-gold); text-decoration: underline;">隐私政策</a> 与 <a href="/terms/" style="color: var(--color-gold); text-decoration: underline;">使用条款</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

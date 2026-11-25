@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 页面未找到 - 机场精选 Airport Select"
+  description="抱歉，您访问的页面不存在或已被移除。请返回机场精选首页、精选榜单或品牌大全继续浏览。"
+  noindex={true}
+>
+  <div class="container" style="padding-top: 100px; padding-bottom: 120px; text-align: center;">
+    <div style="font-size: 5rem; font-weight: 900; color: var(--color-gold); line-height: 1; margin-bottom: 16px;">
+      404
+    </div>
+    <h1 style="font-size: 2rem; font-weight: 800; color: var(--color-primary); margin-bottom: 16px;">
+      抱歉，您访问的页面不存在
+    </h1>
+    <p style="font-size: 1.1rem; color: var(--color-text-muted); max-width: 560px; margin: 0 auto 36px auto; line-height: 1.8;">
+      您所请求的 URL 可能已发生调整、重命名或已被删除。建议通过下方导航重新探索机场精选的核心内容：
+    </p>
+
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="/" class="btn btn-primary btn-lg">返回网站首页</a>
+      <a href="/ranking/" class="btn btn-gold btn-lg">查看精选榜单</a>
+      <a href="/airports/" class="btn btn-outline btn-lg">浏览品牌大全</a>
+    </div>
+  </div>
+</BaseLayout>

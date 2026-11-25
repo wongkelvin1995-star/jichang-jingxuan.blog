@@ -1,0 +1,210 @@
+---
+import plans from '../data/plans.json';
+import brands from '../data/brands.json';
+
+interface Props {
+  initialFilter?: string;
+  limit?: number;
+  showFilters?: boolean;
+  /** Cycle filter button that is active on first render ('all' | 'monthly' | 'annual' | 'lifetime').
+   *  Rows outside this cycle are rendered but hidden, so the full list stays crawlable and
+   *  still appears when the visitor clicks 全部周期. */
+  defaultCycle?: 'all' | 'monthly' | 'annual' | 'lifetime';
+}
+
+const { initialFilter = 'all', limit, showFilters = true, defaultCycle = 'all' } = Astro.props;
+const isRowVisible = (p: { cycleCategory: string }) => defaultCycle === 'all' || p.cycleCategory === defaultCycle;
+
+let displayPlans = plans;
+if (initialFilter === 'monthly') {
+  displayPlans = plans.filter(p => p.cycleCategory === 'monthly');
+} else if (initialFilter === 'annual') {
+  displayPlans = plans.filter(p => p.cycleCategory === 'annual');
+} else if (initialFilter === 'lifetime') {
+  displayPlans = plans.filter(p => p.cycleCategory === 'lifetime');
+} else if (initialFilter === 'under-100-yearly') {
+  displayPlans = plans.filter(p => p.cycleCategory === 'annual' && p.price <= 100);
+} else if (initialFilter === 'under-20-monthly') {
+  displayPlans = plans.filter(p => p.cycleCategory === 'monthly' && p.price <= 20);
+} else if (initialFilter === 'under-30-monthly') {
+  displayPlans = plans.filter(p => p.cycleCategory === 'monthly' && p.price <= 30);
+} else if (initialFilter === '30-60-monthly') {
+  displayPlans = plans.filter(p => p.cycleCategory === 'monthly' && p.price >= 30 && p.price <= 60);
+} else if (initialFilter === 'large-traffic') {
+  displayPlans = plans.filter(p => p.trafficGb >= 500);
+}
+
+if (limit) {
+  displayPlans = displayPlans.slice(0, limit);
+}
+
+const visibleCount = displayPlans.filter(isRowVisible).length;
+---
+
+<div class="plan-table-widget">
+  {showFilters && (
+    <div style="background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 24px; box-shadow: var(--shadow-sm);">
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;" id="cycle-filter-group" data-default-cycle={defaultCycle}>
+          <button class:list={['topic-chip', { active: defaultCycle === 'all' }]} data-filter="all">全部周期 ({plans.length})</button>
+          <button class:list={['topic-chip', { active: defaultCycle === 'monthly' }]} data-filter="monthly">月付套餐</button>
+          <button class:list={['topic-chip', { active: defaultCycle === 'annual' }]} data-filter="annual">年付优惠</button>
+          <button class:list={['topic-chip', { active: defaultCycle === 'lifetime' }]} data-filter="lifetime">不限时流量包</button>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+          <select id="brand-select-filter" style="padding: 8px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.88rem; background: var(--color-bg);" aria-label="按品牌筛选">
+            <option value="all">所有 18 个品牌</option>
+            {brands.map(b => (
+              <option value={b.slug}>{b.name}</option>
+            ))}
+          </select>
+
+          <select id="sort-select" style="padding: 8px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.88rem; background: var(--color-bg);" aria-label="排序方式">
+            <option value="default">默认推荐排序</option>
+            <option value="price-asc">价格：由低到高</option>
+            <option value="price-desc">价格：由高到低</option>
+            <option value="traffic-desc">流量：由大到小</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <div class="table-outer-wrapper">
+    <div style="padding: 12px 20px; background: #F8F6F0; border-bottom: 1px solid var(--color-border); font-size: 0.82rem; color: var(--color-text-muted); display: flex; justify-content: space-between; align-items: center;">
+      <span>提示：同一套餐多个周期价格均已完整保留。左右滑动可查看完整参数。</span>
+      <span id="filtered-count" style="font-weight: 700; color: var(--color-primary);">共 {visibleCount} 条记录</span>
+    </div>
+
+    <div class="table-scroll-container">
+      <table class="plan-table" id="interactive-plan-table">
+        <thead>
+          <tr>
+            <th>品牌</th>
+            <th>套餐名称</th>
+            <th>付款周期</th>
+            <th>价格</th>
+            <th>流量配额</th>
+            <th>设备 / 速率</th>
+            <th style="text-align: right;">选购操作</th>
+          </tr>
+        </thead>
+        <tbody id="plan-table-tbody">
+          {displayPlans.map(p => (
+            <tr data-brand={p.brandId} data-cycle={p.cycleCategory} data-price={p.price} data-traffic={p.trafficGb} hidden={!isRowVisible(p)}>
+              <td class="plan-name-cell">
+                <a href={`/airports/${p.brandId}/`} style="color: var(--color-primary); font-weight: 800; text-decoration: underline;" title={`查看${p.brandName}品牌资料`}>
+                  {p.brandName}
+                </a>
+              </td>
+              <td style="font-weight: 600;">{p.planName}</td>
+              <td>
+                <span class="feature-pill" style="font-size: 0.78rem;">
+                  {p.cycle}
+                </span>
+              </td>
+              <td class="plan-price-cell">
+                {p.priceRaw}
+                {p.monthlyEquivalent && p.cycleCategory !== 'monthly' && (
+                  <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: normal; display: block;">
+                    (约¥{p.monthlyEquivalent}/月)
+                  </span>
+                )}
+              </td>
+              <td>
+                <strong>{p.traffic}</strong>
+              </td>
+              <td style="font-size: 0.85rem; color: var(--color-text-muted);">
+                <div>设备：{p.devices}</div>
+                <div>{p.speedLimit}</div>
+              </td>
+              <td style="text-align: right; white-space: nowrap;">
+                <div style="display: inline-flex; gap: 6px;">
+                  <a href={`/airports/${p.brandId}/`} class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 0.78rem;">
+                    详情
+                  </a>
+                  <a href={p.purchaseUrl} target="_blank" rel="sponsored nofollow noopener" class="btn btn-primary btn-sm" style="padding: 4px 12px; font-size: 0.78rem;">
+                    购买
+                  </a>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const table = document.getElementById('interactive-plan-table');
+    const tbody = document.getElementById('plan-table-tbody');
+    const cycleButtons = document.querySelectorAll('#cycle-filter-group button');
+    const brandSelect = document.getElementById('brand-select-filter');
+    const sortSelect = document.getElementById('sort-select');
+    const countDisplay = document.getElementById('filtered-count');
+
+    if (!tbody) return;
+
+    const filterGroup = document.getElementById('cycle-filter-group');
+    let currentCycle = (filterGroup && filterGroup.getAttribute('data-default-cycle')) || 'all';
+    let currentBrand = 'all';
+    let currentSort = 'default';
+
+    const originalRows = Array.from(tbody.querySelectorAll('tr'));
+
+    function applyFilterAndSort() {
+      let filtered = originalRows.filter(row => {
+        const cycle = row.getAttribute('data-cycle');
+        const brand = row.getAttribute('data-brand');
+
+        if (currentCycle !== 'all' && cycle !== currentCycle) return false;
+        if (currentBrand !== 'all' && brand !== currentBrand) return false;
+        return true;
+      });
+
+      if (currentSort === 'price-asc') {
+        filtered.sort((a, b) => parseFloat(a.getAttribute('data-price') || 0) - parseFloat(b.getAttribute('data-price') || 0));
+      } else if (currentSort === 'price-desc') {
+        filtered.sort((a, b) => parseFloat(b.getAttribute('data-price') || 0) - parseFloat(a.getAttribute('data-price') || 0));
+      } else if (currentSort === 'traffic-desc') {
+        filtered.sort((a, b) => parseFloat(b.getAttribute('data-traffic') || 0) - parseFloat(a.getAttribute('data-traffic') || 0));
+      }
+
+      // Re-append
+      tbody.innerHTML = '';
+      filtered.forEach(r => { r.hidden = false; tbody.appendChild(r); });
+
+      if (countDisplay) {
+        countDisplay.textContent = `共 ${filtered.length} 条记录`;
+      }
+    }
+
+    if (cycleButtons) {
+      cycleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          cycleButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCycle = btn.getAttribute('data-filter') || 'all';
+          applyFilterAndSort();
+        });
+      });
+    }
+
+    if (brandSelect) {
+      brandSelect.addEventListener('change', (e) => {
+        currentBrand = e.target.value;
+        applyFilterAndSort();
+      });
+    }
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', (e) => {
+        currentSort = e.target.value;
+        applyFilterAndSort();
+      });
+    }
+  });
+</script>

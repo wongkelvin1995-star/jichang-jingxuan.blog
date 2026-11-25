@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import brands from '../../data/brands.json';
+import articles from '../../data/articles.json';
+import plans from '../../data/plans.json';
+
+const breadcrumbs = [
+  { name: '首页', url: '/' },
+  { name: '站内搜索', url: '/search/' }
+];
+---
+
+<BaseLayout
+  title="站内全局搜索 - 机场品牌、套餐与文章指南快速检索｜机场精选"
+  description="机场精选站内搜索：输入品牌名称、套餐价格、协议类型或关键字，即时查找18个机场品牌、142条套餐与30篇原创文章。"
+  canonicalUrl="https://jichang-jingxuan.blog/search/"
+  breadcrumbs={breadcrumbs}
+  noindex={true}
+>
+  <div class="container" style="padding-top: 40px; padding-bottom: 80px;">
+    <nav class="breadcrumb-nav">
+      <a href="/">首页</a>
+      <span>&gt;</span>
+      <span style="color: var(--color-primary); font-weight: 700;">站内搜索</span>
+    </nav>
+
+    <header style="max-width: 760px; margin: 0 auto 40px auto; text-align: center;">
+      <div class="section-eyebrow">INSTANT SITE SEARCH</div>
+      <h1 class="section-title">站内全量数据检索</h1>
+      <p class="section-subtitle" style="margin: 0 auto 30px auto;">
+        输入品牌名（如“灵动云”、“暮光”）、协议（“IEPL”、“Clash”）、资费（“20元”、“年付”）或关键词快速定位。
+      </p>
+
+      <!-- Search Input Box -->
+      <div style="position: relative; max-width: 600px; margin: 0 auto;">
+        <input
+          type="search"
+          id="global-search-input"
+          placeholder="输入关键词进行搜索，如：灵动云、年付、IEPL、ChatGPT..."
+          style="width: 100%; padding: 16px 24px; font-size: 1.1rem; border: 2px solid var(--color-border); border-radius: 40px; background: var(--color-card-bg); box-shadow: var(--shadow-sm); outline: none; transition: border-color 0.2s ease;"
+          autofocus
+        />
+      </div>
+
+      <!-- Quick Search Keywords -->
+      <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 16px;">
+        <span style="font-size: 0.82rem; color: var(--color-text-muted);">热门推荐：</span>
+        {['灵动云', '暮光加速', '微风网络', '大佬云', 'IEPL专线', '百元年付', '20元月付', '不限时', 'Clash', 'ChatGPT'].map(kw => (
+          <button class="topic-chip quick-kw-btn" style="padding: 4px 12px; font-size: 0.8rem;" data-kw={kw}>
+            {kw}
+          </button>
+        ))}
+      </div>
+    </header>
+
+    <!-- Search Results Section -->
+    <div style="max-width: 960px; margin: 0 auto;">
+      <div id="search-status-bar" style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 24px; display: none;">
+        搜索结果：共找到 <span id="search-count" style="font-weight: 800; color: var(--color-primary);">0</span> 条相关记录
+      </div>
+
+      <!-- Results Container -->
+      <div id="search-results-list" style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- Initial State Hint -->
+      <div id="initial-search-hint" style="text-align: center; padding: 60px 20px; color: var(--color-text-muted);">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🔍</div>
+        <p style="font-size: 1.05rem;">请在上方输入框键入您想了解的机场品牌、套餐类型或技术疑问</p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline define:vars={{ brands, articles, plans }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('global-search-input');
+    const statusBar = document.getElementById('search-status-bar');
+    const countDisplay = document.getElementById('search-count');
+    const resultsContainer = document.getElementById('search-results-list');
+    const initialHint = document.getElementById('initial-search-hint');
+    const quickKwButtons = document.querySelectorAll('.quick-kw-btn');
+
+    // Build unified index
+    const searchIndex = [
+      ...brands.map(b => ({
+        type: '机场品牌',
+        title: `${b.name} (${b.englishName || ''})`,
+        desc: `${b.lineType} · ${b.tagline || b.description}`,
+        url: `/airports/${b.slug}/`,
+        meta: `排名：NO. 0${b.rank} | 最低月付：${b.minMonthlyPrice ? '¥' + b.minMonthlyPrice : '-'}`,
+        rawText: `${b.name} ${b.englishName} ${b.lineType} ${b.tagline} ${b.description} ${b.regions} ${b.protocols}`.toLowerCase()
+      })),
+      ...articles.map(a => ({
+        type: '精选文章',
+        title: a.title,
+        desc: a.excerpt,
+        url: `/articles/${a.slug}/`,
+        meta: `分类：${a.category} | 发布：${a.date} | 阅读：${a.readTime}`,
+        rawText: `${a.title} ${a.excerpt} ${a.category}`.toLowerCase()
+      })),
+      ...plans.slice(0, 50).map(p => ({
+        type: '套餐规格',
+        title: `${p.brandName} - ${p.planName} (${p.cycle})`,
+        desc: `价格：${p.priceRaw} · 流量配额：${p.traffic} · 设备：${p.devices}`,
+        url: `/airports/${p.brandId}/`,
+        meta: `所属品牌：${p.brandName} | 付款周期：${p.cycle}`,
+        rawText: `${p.brandName} ${p.planName} ${p.cycle} ${p.traffic} ${p.priceRaw}`.toLowerCase()
+      }))
+    ];
+
+    function performSearch(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) {
+        if (statusBar) statusBar.style.display = 'none';
+        if (resultsContainer) resultsContainer.innerHTML = '';
+        if (initialHint) initialHint.style.display = 'block';
+        return;
+      }
+
+      if (initialHint) initialHint.style.display = 'none';
+      if (statusBar) statusBar.style.display = 'block';
+
+      const matched = searchIndex.filter(item => item.rawText.includes(q));
+
+      if (countDisplay) countDisplay.textContent = matched.length;
+
+      if (resultsContainer) {
+        if (matched.length === 0) {
+          resultsContainer.innerHTML = `
+            <div class="faq-card" style="padding: 40px; text-align: center; color: var(--color-text-muted);">
+              <p style="font-size: 1.1rem; margin-bottom: 8px;">未找到与 "<strong>${query}</strong>" 相关的记录</p>
+              <p style="font-size: 0.88rem;">建议尝试更简短的关键词，如“灵动云”、“年付”、“专线”或“月付”。</p>
+            </div>
+          `;
+        } else {
+          resultsContainer.innerHTML = matched.map(item => `
+            <div class="faq-card" style="padding: 20px 24px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <span class="rank-badge" style="font-size: 0.75rem;">${item.type}</span>
+                <span style="font-size: 0.78rem; color: var(--color-text-muted);">${item.meta}</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary); margin-bottom: 6px;">
+                <a href="${item.url}" style="color: var(--color-primary); text-decoration: underline;">
+                  ${item.title}
+                </a>
+              </h3>
+              <p style="font-size: 0.92rem; color: var(--color-text-main); line-height: 1.6; margin-bottom: 12px;">
+                ${item.desc}
+              </p>
+              <div style="text-align: right;">
+                <a href="${item.url}" style="font-size: 0.85rem; font-weight: 700; color: var(--color-gold);">
+                  查看完整详情 &gt;
+                </a>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    if (input) {
+      input.addEventListener('input', (e) => {
+        performSearch(e.target.value);
+      });
+    }
+
+    quickKwButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const kw = btn.getAttribute('data-kw');
+        if (input && kw) {
+          input.value = kw;
+          performSearch(kw);
+        }
+      });
+    });
+  });
+</script>
